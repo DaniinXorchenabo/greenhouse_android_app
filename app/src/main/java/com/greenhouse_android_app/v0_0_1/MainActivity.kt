@@ -10,33 +10,24 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val OAUTH2_TOKEN = ""
+    }
+
     var test_text: TextView? = null
+    var oauth2_token: String? = null
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        oauth2_token = intent.getStringExtra(OAUTH2_TOKEN)
+
 
         test_text = findViewById(R.id.test_text);
         test_text?.text = "Hi"
         Log.d("MyLog", "Hi")
-        thread {
-            try {
-
-                val json = URL("https://google.com").readText()
-                runOnUiThread {
-                    Log.d("MyLog", json)
-                    test_text?.text = json
-                }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Log.d("MyLog", "Не получилось с сетью ${e.toString()}")
-                    test_text?.text = "Не получилось с сетью  ${e.toString()}"
-                }
-                return@thread
-            }
-
-        }
+        test_text?.text = oauth2_token
 //        test_text?.setText(URL("https://google.com").readText())
     }
 }

@@ -1,10 +1,12 @@
 package com.greenhouse_android_app.v0_0_1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.*
 import retrofit2.Retrofit
@@ -57,12 +59,22 @@ class AuthActivity : AppCompatActivity() {
                         .build()
 
                     val body = httpClient_.newCall(request).execute().use {
+//                        it.
                         it.body!!.string()
                     }
+
+                    val gson = Gson()
+
+                    val tutorial_1: OAuth2Model = gson.fromJson(body, OAuth2Model::class.java)
 
                     runOnUiThread {
                         Log.d("MyLog", body)
                     }
+
+                    val mainIntent_ = Intent(this, MainActivity::class.java)
+                    mainIntent_.putExtra(MainActivity.OAUTH2_TOKEN, tutorial_1.access_token)
+                    startActivity(mainIntent_)
+
                 } catch (e: Exception) {
                     runOnUiThread {
                         Log.d("MyLog", "Не получилось с сетью ${e.toString()}")
@@ -83,7 +95,9 @@ class AuthActivity : AppCompatActivity() {
 //                .url(url)
 //                .build()
 //            chain.proceed(request)
-//
+
+////    https://medium.com/hacktive-devs/making-network-calls-on-android-with-retrofit-kotlins-coroutines-72fd2594184b
+
 ////            val formBody: RequestBody = Builder()
 ////                .add("message", "Your message")
 ////                .build()
