@@ -38,36 +38,6 @@ class AuthActivity : AppCompatActivity() {
         loginView = findViewById(R.id.usernameInputView)
         passwordView = findViewById(R.id.passwordInputView)
 
-
-        thread {
-            try {
-
-                val formBody: RequestBody = FormBody.Builder()
-                    .add("username", "test_user")
-                    .add("password", "123456789").build()
-
-                val request = Request.Builder()
-                    .url("http://dev-api.astrokupol.com/token")
-                    .post(formBody)
-                    .header("Authorization", "Basic Og==")
-                    .header("Content-Type", "application/x-www-form-urlencoded")
-                    .build()
-
-                val body = httpClient_.newCall(request).execute().use {
-                    it.body!!.string()
-                }
-
-                runOnUiThread {
-                    Log.d("MyLog", body)
-                }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Log.d("MyLog", "Не получилось с сетью ${e.toString()}")
-                }
-                return@thread
-            }
-
-        }
     }
 
     fun sendLoginAndPassword(view: View){
@@ -76,8 +46,8 @@ class AuthActivity : AppCompatActivity() {
                 try {
 
                     val formBody: RequestBody = FormBody.Builder()
-                        .add("username", "test_user")
-                        .add("password", "123456789").build()
+                        .add("username", loginView!!.text.toString())
+                        .add("password", passwordView!!.text.toString()).build()
 
                     val request = Request.Builder()
                         .url("http://dev-api.astrokupol.com/token")
