@@ -35,6 +35,8 @@ class AuthActivity : AppCompatActivity() {
         loginView = findViewById(R.id.usernameInputView)
         passwordView = findViewById(R.id.passwordInputView)
 
+//        OkHttpWebSocket()
+
     }
 
     fun sendLoginAndPassword(view: View){
