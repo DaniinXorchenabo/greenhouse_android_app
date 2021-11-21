@@ -52,4 +52,7 @@ class BaseActivity : AppCompatActivity() {
 //        Log.d("MyLog", "Hi")
 //        test_text?.text = oauth2_token
     }
+
+
+
 }

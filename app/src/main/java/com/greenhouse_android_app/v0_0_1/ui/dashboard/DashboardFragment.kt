@@ -24,7 +24,7 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
@@ -35,11 +35,37 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        showRandomTemperature()
         return root
     }
+
+    fun showRandomTemperature(){
+        val temperatureView: TextView = binding.temperatureTextField
+        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+            temperatureView.text = getString(R.string.temperature_is_, 34);
+        })
+    }
+
+
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        // Get back arguments
+//        val someInt = requireArguments().getInt("someInt", 0)
+//        val someString = requireArguments().getString("someString", "")
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+//    fun newInstance(someInt: Int, someString: String?): DashboardFragment {
+//        val dashboardFragment = DashboardFragment()
+//        val args = Bundle()
+//        args.putInt("someInt", someInt)
+//        args.putString("SomeString", someString)
+//        dashboardFragment.setArguments(args)
+//        return dashboardFragment
+//    }
 }
