@@ -7,12 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import com.google.gson.Gson
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.*
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.net.URI
-import java.net.URL
 import kotlin.concurrent.thread
 
 
@@ -71,8 +66,8 @@ class AuthActivity : AppCompatActivity() {
                         Log.d("MyLog", body)
                     }
 
-                    val mainIntent_ = Intent(this, MainActivity::class.java)
-                    mainIntent_.putExtra(MainActivity.OAUTH2_TOKEN, tutorial_1.access_token)
+                    val mainIntent_ = Intent(this, BaseActivity::class.java)
+                    mainIntent_.putExtra(BaseActivity.OAUTH2_TOKEN, tutorial_1.access_token)
                     startActivity(mainIntent_)
 
                 } catch (e: Exception) {

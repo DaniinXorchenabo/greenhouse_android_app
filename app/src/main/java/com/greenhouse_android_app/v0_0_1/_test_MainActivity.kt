@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import java.net.URL
-import kotlin.concurrent.thread
 
-class MainActivity : AppCompatActivity() {
+class _test_MainActivity : AppCompatActivity() {
 
     companion object {
         const val OAUTH2_TOKEN = ""
@@ -20,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout._test_activity_main)
         oauth2_token = intent.getStringExtra(OAUTH2_TOKEN)
 
 
