@@ -49,7 +49,7 @@ class AuthActivity : AppCompatActivity() {
                         .add("password", passwordView!!.text.toString()).build()
 
                     val request = Request.Builder()
-                        .url("http://dev-api.astrokupol.com/token")
+                        .url("https://dev-api.astrokupol.com/token")
                         .post(formBody)
                         .header("Authorization", "Basic Og==")
                         .header("Content-Type", "application/x-www-form-urlencoded")

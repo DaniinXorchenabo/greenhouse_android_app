@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.internal.ContextUtils.getActivity
+import com.google.gson.Gson
+import com.greenhouse_android_app.v0_0_1.OAuth2Model
 import com.greenhouse_android_app.v0_0_1.R
 import com.greenhouse_android_app.v0_0_1.databinding.FragmentDashboardBinding
 //import com.greenhouse_android_app.v0_0_1.test_ws_2.MainWsActivity
@@ -26,6 +28,9 @@ class DashboardFragment : Fragment() {
 
     //    private var start: Button? = null
     private var output_field: TextView? = null
+    private var temperatureOutput: TextView? = null
+    private var humidityOutput: TextView? = null
+
     private var client: OkHttpClient? = null
     var listener: EchoWebSocketListener? = null
     var currentWebSocketObj: WebSocket? = null
@@ -48,11 +53,11 @@ class DashboardFragment : Fragment() {
         }
 
         override fun onMessage(webSocket: WebSocket, text: String) {
-            outputObj?.output("Receiving : $text")
+            outputObj?.output(text)
         }
 
         override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
-            outputObj?.output("Receiving bytes : " + bytes.hex())
+            outputObj?.output(bytes.hex())
         }
 
         override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
@@ -91,6 +96,8 @@ class DashboardFragment : Fragment() {
 
 //        start = binding.start
         output_field = binding.testWsConnection
+        temperatureOutput = binding.temperatureTextView
+        humidityOutput = binding.humidityTextView
         client = OkHttpClient()
 //        start!!.setOnClickListener { start() }
 
@@ -102,7 +109,8 @@ class DashboardFragment : Fragment() {
     fun showRandomTemperature() {
         val temperatureView: TextView = binding.temperatureTextField
         dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            temperatureView.text = getString(R.string.temperature_is_, 34);
+//            temperatureView.text = getString(R.string.temperature_is_, 34);
+            temperatureView.text = ""
         })
     }
 
@@ -131,8 +139,18 @@ class DashboardFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     fun output(txt: String) {
         Log.d("WsLog", txt)
+//        val txt1 = "{\"temperature\": 38.56, \"humidity\": 44.52}"
+        val gson = Gson()
+        // TODO: add try catch "FATAL EXCEPTION: OkHttp Dispatcher" IllegalStateException
+        // TODO: ошибка при разрыве соединения с сетью,  именно ошибка парсинга
+        val dataFromGreenHouse: WsData = gson.fromJson(txt, WsData::class.java)
         getActivity()?.runOnUiThread {
-            output_field?.text = output_field?.text.toString() + txt + "\n"
+            //        val someString = requireArguments().getString("someString", "")
+
+//            getString(R.string.temperature_is_, 34);
+            temperatureOutput?.text = getString(R.string.temperature_is_,  dataFromGreenHouse.temperature.toString())
+            humidityOutput?.text = getString(R.string.humidity_is_, dataFromGreenHouse.humidity.toString())
+            output_field?.text = txt + "\n" + output_field?.text.toString()
         }
 
 
