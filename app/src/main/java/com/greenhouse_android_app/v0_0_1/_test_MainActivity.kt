@@ -26,6 +26,5 @@ class _test_MainActivity : AppCompatActivity() {
         test_text?.text = "Hi"
         Log.d("MyLog", "Hi")
         test_text?.text = oauth2_token
-//        test_text?.setText(URL("https://google.com").readText())
     }
 }

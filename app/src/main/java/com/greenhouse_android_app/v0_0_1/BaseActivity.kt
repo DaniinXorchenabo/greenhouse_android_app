@@ -46,11 +46,6 @@ class BaseActivity : AppCompatActivity() {
         // =======!    !=======
         oauth2_token = intent.getStringExtra(_test_MainActivity.OAUTH2_TOKEN)
 
-
-//        test_text = findViewById(R.id.test_text);
-//        test_text?.text = "Hi"
-//        Log.d("MyLog", "Hi")
-//        test_text?.text = oauth2_token
     }
 
 

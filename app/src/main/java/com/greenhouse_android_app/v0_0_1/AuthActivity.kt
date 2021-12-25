@@ -35,8 +35,6 @@ class AuthActivity : AppCompatActivity() {
         loginView = findViewById(R.id.usernameInputView)
         passwordView = findViewById(R.id.passwordInputView)
 
-//        OkHttpWebSocket()
-
     }
 
     fun sendLoginAndPassword(view: View){
@@ -82,41 +80,4 @@ class AuthActivity : AppCompatActivity() {
             }
         }
     }
-
-//    object NewsApiService {
-//        //creating a Network Interceptor to add api_key in all the request as authInterceptor
-//        private val interceptor = Interceptor { chain ->
-//            val url = chain.request().url.newBuilder().build()
-//            val request = chain.request()
-//                .newBuilder()
-//                .url(url)
-//                .build()
-//            chain.proceed(request)
-
-////    https://medium.com/hacktive-devs/making-network-calls-on-android-with-retrofit-kotlins-coroutines-72fd2594184b
-
-////            val formBody: RequestBody = Builder()
-////                .add("message", "Your message")
-////                .build()
-////            val request: Request = Builder()
-////                .url("http://www.foo.bar/index.php")
-////                .post(formBody)
-////                .build()
-//        }
-//        // we are creating a networking client using OkHttp and add our authInterceptor.
-//        private val apiClient = OkHttpClient().newBuilder().addInterceptor(interceptor).build()
-//
-//        private fun getRetrofit(): Retrofit {
-//            return Retrofit.Builder().client(apiClient)
-//                .baseUrl("http://dev-api.astrokupol.com/token")
-//                .addConverterFactory(MoshiConverterFactory.create())
-//                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-//                .build()
-//        }
-//
-//        val auth2 = getRetrofit().toString()
-//
-////        val newsApi: NewsApiInterface = getRetrofit().create(NewsApiInterface::class.java)
-//    }
-
 }

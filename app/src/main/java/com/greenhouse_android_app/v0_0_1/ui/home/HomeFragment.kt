@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.greenhouse_android_app.v0_0_1.R
 import com.greenhouse_android_app.v0_0_1.databinding.FragmentHomeBinding
+import com.greenhouse_android_app.v0_0_1.ui.dashboard.DashboardFragment
 
 class HomeFragment : Fragment() {
 
@@ -42,4 +43,12 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+//    fun test_ws_send(){
+//        val fragment = DashboardFragment.newInstance()
+//        val transaction = fragmentManager.beginTransaction()
+//        transaction.replace(R.id.content, fragment)
+//        transaction.addToBackStack(null)
+//        transaction.commit()
+//    }
 }
